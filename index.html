@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Interpolation Viewer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            height: 100vh;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            gap: 20px;
+        }
+        .image {
+            width: 200px;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .slider-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .slider {
+            width: 300px;
+        }
+        .label {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Interpolation Viewer</h1>
+    <div class="container">
+        <img src="flower.jpg" alt="Canny Original" class="image">
+        <img id="interpolated" src="image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny0.0_color1.0.jpg" alt="Interpolated Image" class="image">
+        <img src="sunflower.jpeg" alt="Color Original" class="image">
+    </div>
+    <div class="slider-container">
+        <input type="range" id="slider" class="slider" min="0" max="10" value="0" step="1">
+        <div class="label" id="slider-label">flower.jpg:sunflower.jpeg = 0.0 : 1.0</div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const interpolatedImage = document.getElementById('interpolated');
+        const sliderLabel = document.getElementById('slider-label');
+
+        // Update the image and label based on slider value
+        slider.addEventListener('input', () => {
+            const ratio = slider.value / 10;
+            const reverseRatio = (10 - slider.value) / 10;
+            interpolatedImage.src = `image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny${reverseRatio.toFixed(1)}_color${ratio.toFixed(1)}.jpg`;
+            sliderLabel.textContent = `flower.jpg:sunflower.jpeg = ${reverseRatio.toFixed(1)} : ${ratio.toFixed(1)}`;
+        });
+    </script>
+</body>
+</html>
