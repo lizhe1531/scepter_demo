@@ -44,9 +44,9 @@
 <body>
     <h1>Image Interpolation Viewer</h1>
     <div class="container">
-        <img src="flower.jpg" alt="Canny Original" class="image">
-        <img id="interpolated" src="image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny0.0_color1.0.jpg" alt="Interpolated Image" class="image">
-        <img src="sunflower.jpeg" alt="Color Original" class="image">
+        <img src="show/flower.jpg" alt="Canny Original" class="image">
+        <img id="interpolated" src="show/image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny0.0_color1.0.jpg" alt="Interpolated Image" class="image">
+        <img src="show/sunflower.jpeg" alt="Color Original" class="image">
     </div>
     <div class="slider-container">
         <input type="range" id="slider" class="slider" min="0" max="10" value="0" step="1">
@@ -62,7 +62,7 @@
         slider.addEventListener('input', () => {
             const ratio = slider.value / 10;
             const reverseRatio = (10 - slider.value) / 10;
-            interpolatedImage.src = `image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny${reverseRatio.toFixed(1)}_color${ratio.toFixed(1)}.jpg`;
+            interpolatedImage.src = `show/image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny${reverseRatio.toFixed(1)}_color${ratio.toFixed(1)}.jpg`;
             sliderLabel.textContent = `flower.jpg:sunflower.jpeg = ${reverseRatio.toFixed(1)} : ${ratio.toFixed(1)}`;
         });
     </script>
