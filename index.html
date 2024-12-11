@@ -38,6 +38,8 @@
 </head>
 <body>
     <h1>Image Interpolation Viewer</h1>
+
+    <!-- First Interpolation Section -->
     <div class="container">
         <!-- Left images -->
         <div class="image-container">
@@ -59,13 +61,36 @@
             <span>Color Original</span>
         </div>
     </div>
-
-    <!-- Slider -->
     <input type="range" id="slider" class="slider" min="0" max="1" step="0.1" value="0">
     <div class="label" id="ratio-label">canny:color = 0.0 : 1.0</div>
 
+    <!-- Second Interpolation Section -->
+    <div class="container">
+        <!-- Left images -->
+        <div class="image-container">
+            <img id="pose-image" src="show/basketball.jpg" alt="Pose Original" class="image">
+            <img id="pose-helper-image" src="show/pose.jpg" alt="Pose Helper" class="image">
+            <span>Pose Original</span>
+        </div>
+
+        <!-- Middle interpolated image -->
+        <div class="image-container">
+            <img id="interpolated-pose-image" src="show/image_pose_color/A_boy_wearing_a_plaid_shirt_is_playing_basketball/pose0.0_color1.0.jpg" alt="Interpolated Pose Image" class="image">
+            <span>Interpolated Image</span>
+        </div>
+
+        <!-- Right images -->
+        <div class="image-container">
+            <img id="pose-color-image" src="show/sunflower.jpg" alt="Color Original" class="image">
+            <img id="pose-color-helper-image" src="show/color.jpg" alt="Color Helper" class="image">
+            <span>Color Original</span>
+        </div>
+    </div>
+    <input type="range" id="pose-slider" class="slider" min="0" max="1" step="0.1" value="0">
+    <div class="label" id="pose-ratio-label">pose:color = 0.0 : 1.0</div>
+
     <script>
-        // JavaScript logic
+        // First slider logic
         const slider = document.getElementById('slider');
         const interpolatedImage = document.getElementById('interpolated-image');
         const ratioLabel = document.getElementById('ratio-label');
@@ -79,6 +104,22 @@
 
             // Update the label
             ratioLabel.textContent = `canny:color = ${reverseRatio} : ${ratio}`;
+        });
+
+        // Second slider logic
+        const poseSlider = document.getElementById('pose-slider');
+        const interpolatedPoseImage = document.getElementById('interpolated-pose-image');
+        const poseRatioLabel = document.getElementById('pose-ratio-label');
+
+        poseSlider.addEventListener('input', () => {
+            const ratio = parseFloat(poseSlider.value).toFixed(1);
+            const reverseRatio = (1 - ratio).toFixed(1);
+
+            // Update the interpolated image
+            interpolatedPoseImage.src = `show/image_pose_color/A_boy_wearing_a_plaid_shirt_is_playing_basketball/pose${reverseRatio}_color${ratio}.jpg`;
+
+            // Update the label
+            poseRatioLabel.textContent = `pose:color = ${reverseRatio} : ${ratio}`;
         });
     </script>
 </body>
