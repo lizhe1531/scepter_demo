@@ -7,14 +7,21 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 20px;
+        }
+        .section {
+            margin: 50px auto; /* Add space between sections */
+            padding: 30px;
+            max-width: 800px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 20px;
         }
         .image-container {
             display: flex;
@@ -29,65 +36,73 @@
         }
         .slider {
             margin: 20px auto;
-            width: 60%;
+            width: 80%;
         }
         .label {
             margin-top: 10px;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <h1>Image Interpolation Viewer</h1>
 
-    <!-- First Interpolation Section -->
-    <div class="container">
-        <!-- Left images -->
-        <div class="image-container">
-            <img id="canny-image" src="show/flower.jpg" alt="Canny Original" class="image">
-            <img id="canny-helper-image" src="show/canny.jpg" alt="Canny Helper" class="image">
-            <span>Canny Original</span>
-        </div>
+    <!-- First Section -->
+    <div class="section">
+        <div class="container">
+            <!-- Left images -->
+            <div class="image-container">
+                <img id="canny-image" src="show/flower.jpg" alt="Canny Original" class="image">
+                <img id="canny-helper-image" src="show/canny.jpg" alt="Canny Helper" class="image">
+                <span>Canny Original</span>
+            </div>
 
-        <!-- Middle interpolated image -->
-        <div class="image-container">
-            <img id="interpolated-image" src="show/image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny0.0_color1.0.jpg" alt="Interpolated Image" class="image">
-            <span>Interpolated Image</span>
-        </div>
+            <!-- Middle interpolated image -->
+            <div class="image-container">
+                <img id="interpolated-image" src="show/image_canny_color/a_flower_is_shown_in_front_of_a_tree/canny0.0_color1.0.jpg" alt="Interpolated Image" class="image">
+                <span>Interpolated Image</span>
+            </div>
 
-        <!-- Right images -->
-        <div class="image-container">
-            <img id="color-image" src="show/sunflower.jpg" alt="Color Original" class="image">
-            <img id="color-helper-image" src="show/color.jpg" alt="Color Helper" class="image">
-            <span>Color Original</span>
+            <!-- Right images -->
+            <div class="image-container">
+                <img id="color-image" src="show/sunflower.jpeg" alt="Color Original" class="image">
+                <img id="color-helper-image" src="show/color.jpg" alt="Color Helper" class="image">
+                <span>Color Original</span>
+            </div>
         </div>
+        <input type="range" id="slider" class="slider" min="0" max="1" step="0.1" value="0">
+        <div class="label" id="ratio-label">canny:color = 0.0 : 1.0</div>
     </div>
-    <input type="range" id="slider" class="slider" min="0" max="1" step="0.1" value="0">
-    <div class="label" id="ratio-label">canny:color = 0.0 : 1.0</div>
 
-    <!-- Second Interpolation Section -->
-    <div class="container">
-        <!-- Left images -->
-        <div class="image-container">
-            <img id="pose-image" src="show/basketball.jpg" alt="Pose Original" class="image">
-            <img id="pose-helper-image" src="show/pose.jpg" alt="Pose Helper" class="image">
-            <span>Pose Original</span>
-        </div>
+    <!-- Second Section -->
+    <div class="section">
+        <div class="container">
+            <!-- Left images -->
+            <div class="image-container">
+                <img id="pose-image" src="show/basketball.jpg" alt="Pose Original" class="image">
+                <img id="pose-helper-image" src="show/pose.jpg" alt="Pose Helper" class="image">
+                <span>Pose Original</span>
+            </div>
 
-        <!-- Middle interpolated image -->
-        <div class="image-container">
-            <img id="interpolated-pose-image" src="show/image_pose_color/A_boy_wearing_a_plaid_shirt_is_playing_basketball/pose0.0_color1.0.jpg" alt="Interpolated Pose Image" class="image">
-            <span>Interpolated Image</span>
-        </div>
+            <!-- Middle interpolated image -->
+            <div class="image-container">
+                <img id="interpolated-pose-image" src="show/image_pose_color/A_boy_wearing_a_plaid_shirt_is_playing_basketball/pose0.0_color1.0.jpg" alt="Interpolated Pose Image" class="image">
+                <span>Interpolated Image</span>
+            </div>
 
-        <!-- Right images -->
-        <div class="image-container">
-            <img id="pose-color-image" src="show/sunflower.jpg" alt="Color Original" class="image">
-            <img id="pose-color-helper-image" src="show/color.jpg" alt="Color Helper" class="image">
-            <span>Color Original</span>
+            <!-- Right images -->
+            <div class="image-container">
+                <img id="pose-color-image" src="show/sunflower.jpeg" alt="Color Original" class="image">
+                <img id="pose-color-helper-image" src="show/color.jpg" alt="Color Helper" class="image">
+                <span>Color Original</span>
+            </div>
         </div>
+        <input type="range" id="pose-slider" class="slider" min="0" max="1" step="0.1" value="0">
+        <div class="label" id="pose-ratio-label">pose:color = 0.0 : 1.0</div>
     </div>
-    <input type="range" id="pose-slider" class="slider" min="0" max="1" step="0.1" value="0">
-    <div class="label" id="pose-ratio-label">pose:color = 0.0 : 1.0</div>
 
     <script>
         // First slider logic
